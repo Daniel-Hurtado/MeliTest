@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: meli-validation-api
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://dbfamiliadev.cry0ihafkawi.us-east-1.rds.amazonaws.com/noldev
+    username: usrfam
+    password: Familia2019$.
+    hikari:
+      maximum-pool-size: 2
+      pool-name: KrakenPool
+
+server:
+  port: 8080
+  servlet:
+    context-path: /meli/validation
+
+logging:
+  level:
+    com.familia: DEBUG
