@@ -11,9 +11,9 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://dbfamiliadev.cry0ihafkawi.us-east-1.rds.amazonaws.com/noldev
-    username: usrfam
-    password: Familia2019$.
+    url: jdbc:mysql://localhost:3306/melidatabase
+    username: root
+    password: 1234
     hikari:
       maximum-pool-size: 2
       pool-name: KrakenPool
@@ -26,3 +26,11 @@ server:
 logging:
   level:
     com.familia: DEBUG
+    
+meli:
+  url-api-ip: http://api.ipapi.com/
+  access-key-ip: de472c60002d81a2325f181bd3a82c8d
+  url-api-info-country: http://api.countrylayer.com/v2/name/
+  access-key-info-country: 015ee4b6aff06f099b44a7866770904f
+  url-api-info-currency-country: http://data.fixer.io/api/latest
+  access-key-info-currency-country: e1821fc9ab21b037e49a28f7a8968f85
