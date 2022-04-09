@@ -30,7 +30,7 @@ logging:
 meli:
   url-api-ip: http://api.ipapi.com/
   access-key-ip: de472c60002d81a2325f181bd3a82c8d
-  url-api-info-country: http://api.countrylayer.com/v2/name/
+  url-api-info-country: http://api.countrylayer.com/v2/alpha/
   access-key-info-country: 015ee4b6aff06f099b44a7866770904f
   url-api-info-currency-country: http://data.fixer.io/api/latest
   access-key-info-currency-country: e1821fc9ab21b037e49a28f7a8968f85

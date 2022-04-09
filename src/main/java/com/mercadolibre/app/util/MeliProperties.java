@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
+ * 
+ * Clase donde se configuran las propiedades del proyecto
  * @author Alejandro.Hurtado
  *
  */
@@ -24,9 +26,9 @@ public class MeliProperties {
     /** Propiedad que contiene el access key del API de obtener información de un país*/
     private String accessKeyInfoCountry;
     
-    /** Propiedad que contiene la URL del API de obtener información mediante IP*/
+    /** Propiedad que contiene la URL del API de obtener información de la capitalización*/
     private String urlApiInfoCurrencyCountry;
-    /** Propiedad que contiene el access key del API de obtener información mediante IP*/
+    /** Propiedad que contiene el access key del API de obtener información de la capitalización*/
     private String accessKeyInfoCurrencyCountry;
     
 	/**
