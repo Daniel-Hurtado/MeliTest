@@ -3,11 +3,26 @@
  */
 package com.mercadolibre.app.provider;
 
+import static com.mercadolibre.app.util.MeliConstants.ACCESS_KEY;
+import static com.mercadolibre.app.util.MeliConstants.ERROR_IP;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mercadolibre.app.domain.CountryDTO;
+import com.mercadolibre.app.exception.MeliException;
 import com.mercadolibre.app.util.MeliProperties;
 
 /**
@@ -16,8 +31,7 @@ import com.mercadolibre.app.util.MeliProperties;
  */
 @Component
 public class ObtainInfoCountryProvider {
-	 /** Logger */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ObtainInfoCountryProvider.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ObtainInfoCountryProvider.class);
     /** Objeto para la carga de propiedades */
     private final MeliProperties properties;
     /** Objeto para el consumo de Api Rest */
@@ -33,42 +47,27 @@ public class ObtainInfoCountryProvider {
 	}
     
 	/**
-     * Permite hacer llamado a la api de notificación para el envío de mensajes de texto
+     * Permite hacer llamado a la api de obtener información de un país
      * 
-     * @param smsDto
-     * @param ip
+     * @param countryName
      * @return
-     
-    public boolean sendInvitationToSms(SmsDTO smsDto, String ip) {
-        LOGGER.debug("Init sendOtpToSms with smsDto: {}", smsDto);
-
-        boolean isSended = true;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            ObjectNode request = mapper.createObjectNode();
-            String phone = smsDto.getPhone() != null ? smsDto.getPhone().replace("+", "") : null;
-            request.put("name", smsDto.getName());
-            request.put("lastName", smsDto.getLastName());
-            request.put("email", smsDto.getEmail());
-            request.put("code", smsDto.getCode());
-            request.put("phone", phone);
-            request.put("transaction", smsDto.getTransaction());
-            request.put("userId", smsDto.getUserId());
-            MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-            headers.add(IP_ADDRESS, ip);
-
-            HttpEntity<ObjectNode> requestEntity = new HttpEntity<>(request, headers);
-
-            Response<?> response = this.restTemplate.postForObject(
-                    this.properties.getNotification().getEndpointUrl().concat(this.properties.getNotification().getSmsPath()),
-                    requestEntity, Response.class);
-            isSended = (Boolean) response.getData();
-        } catch (Exception e) {
-            LOGGER.error("Error in sendOtpToSms", e);
-            isSended = false;
-        }
-
-        LOGGER.debug("Finish sendOtpToSms with result: {}", isSended);
-        return isSended;
-    }*/
+     */
+    public CountryDTO consumeApiGetInfoCountry(String countryCode) {
+    	LOGGER.info("Init consumeApiGetInfoCountry with countryCode: {}", countryCode);
+		ResponseEntity <String> response = null;
+		CountryDTO countryInfo = null;
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Content-Type", "application/json");
+			response = restTemplate.exchange(this.properties.getUrlApiInfoCountry().concat(countryCode).concat("?").concat(ACCESS_KEY).concat(this.properties.getAccessKeyInfoCountry()).concat("&fullText=true"), 
+					HttpMethod.GET, null, new ParameterizedTypeReference<String>() {});
+			Gson g = new Gson();  
+			countryInfo = g.fromJson(response.getBody(), CountryDTO.class);
+		} catch (Exception e) {
+			LOGGER.error("Error in consumeApiGetInfoCountry: {}", e);
+		}
+		LOGGER.info("Finish consumeApiGetInfoCountry with response: {}", countryInfo);
+		
+		return countryInfo;
+    }
 }

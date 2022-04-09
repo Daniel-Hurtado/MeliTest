@@ -20,7 +20,7 @@ public class MeliException extends Exception {
     /**
      * Metodo constructor
      */
-    public MeliException(String developerMessage, String userMessage, int status, String errorCode, Throwable e) {
+    public MeliException(int status, String userMessage, String developerMessage, String errorCode, Throwable e) {
         super(developerMessage, e);
         this.userMessage = userMessage;
         this.status = status;
@@ -30,7 +30,7 @@ public class MeliException extends Exception {
     /**
      * Método constructor
      */
-    public MeliException(String developerMessage, String userMessage, int status, String errorCode) {
+    public MeliException(int status, String userMessage, String developerMessage, String errorCode) {
         super(developerMessage);
         this.userMessage = userMessage;
         this.status = status;

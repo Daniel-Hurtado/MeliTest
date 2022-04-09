@@ -3,6 +3,9 @@
  */
 package com.mercadolibre.app.business;
 
+import com.mercadolibre.app.domain.InfoCompleteDTO;
+import com.mercadolibre.app.util.Response;
+
 /**
  * 
  * Interface donde se definen las operaciones a implementar.
@@ -10,16 +13,11 @@ package com.mercadolibre.app.business;
  *
  */
 public interface MeliBusiness {
-	
+
 	/**
-     * Permite actualizar la información del perfil de un usuario
-     *
-     * @param token
-     *            Token de autorizacion que contiene la informacion del usuario en la sesion actual
-     * @param userInfo
-     *            Objeto con la informacion del usuario
+     * Permite obtener la información asociada a una IP
      * @param ip
      *            donde se realiza la solicitud
-     
-    Response<Void> updateUserInfo(String token, UpdateUserDTO userInfo, String ip);*/
+	 */
+	Response<InfoCompleteDTO> validateIp(String ip);
 }
