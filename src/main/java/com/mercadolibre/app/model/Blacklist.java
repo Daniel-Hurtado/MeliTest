@@ -36,7 +36,7 @@ public class Blacklist implements Serializable{
     @Column(name = "ip_address", nullable = false, length = 45)
     private String ipAddress;
     /** Fecha del bloqueo */
-    @Column(name = "date_block", nullable = false, columnDefinition = "TIMESTAMP")
+    @Column(name = "date_block", columnDefinition = "TIMESTAMP")
     private Date fecha;
     
 	/**
