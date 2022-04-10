@@ -2,11 +2,16 @@ plugins {
 	id 'org.springframework.boot' version '2.6.6'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
 group = 'com.mercadolibre'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+bootJar {
+	archiveFileName= "app-0.0.1-SNAPSHOT.jar"
+}
 
 repositories {
 	mavenCentral()
@@ -26,5 +31,48 @@ dependencies {
 }
 
 tasks.named('test') {
+	environment "SPRING_PROFILES_ACTIVE", "test"
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+	dependsOn test
+	finalizedBy jacocoTestCoverageVerification
+	reports {
+		xml.enabled true
+		csv.enabled false
+		html.destination file("${buildDir}/jacocoHtml")
+	}
+	afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                "**/model/**",
+                "**/domain/**",
+                "**/config/**",
+                "**/*Application.class"
+            ])
+        }))
+    }
+}
+
+jacocoTestCoverageVerification {
+	dependsOn jacocoTestReport
+	afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                "**/model/**",
+                "**/domain/**",
+                "**/config/**",
+                "**/*Application.class"
+            ])
+        }))
+    }
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.8
+            }
+        }
+    }
 }

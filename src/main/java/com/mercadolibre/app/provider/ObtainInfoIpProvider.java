@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 import com.mercadolibre.app.domain.IpInfoDTO;
 import com.mercadolibre.app.util.MeliProperties;
+import static java.util.Objects.isNull;
 
 /**
  * @author Alejandro.Hurtado
@@ -52,7 +53,9 @@ public class ObtainInfoIpProvider {
 			response = restTemplate.exchange(this.properties.getUrlApiIp().concat(ip).concat("?").concat(ACCESS_KEY).concat(this.properties.getAccessKeyIp()), 
 					HttpMethod.GET, null, new ParameterizedTypeReference<String>() {});
 			Gson g = new Gson();  
-			ipInfo = g.fromJson(response.getBody(), IpInfoDTO.class);  
+			if(!isNull(response)) {
+				ipInfo = g.fromJson(response.getBody(), IpInfoDTO.class);
+			}
 		} catch (Exception e) {
 			LOGGER.error("Error in consumeApiGetInfoIp: {}", e);
 		}

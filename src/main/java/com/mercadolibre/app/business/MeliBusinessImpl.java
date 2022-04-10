@@ -131,6 +131,7 @@ public class MeliBusinessImpl implements MeliBusiness{
 		Response<Void> response = null;
 		try {
 			this.meliValidation.validationAddressIp(newIp);
+			this.meliValidation.validationBlockIp(newIp);
 			Optional<Blacklist> ipInfo = this.blacklistRepository.findByBlacklistId(blacklistId);
 			if(ipInfo.isPresent()) {
 				Blacklist ipBefore = ipInfo.get();

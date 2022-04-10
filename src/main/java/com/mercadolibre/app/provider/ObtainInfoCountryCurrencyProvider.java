@@ -4,6 +4,7 @@
 package com.mercadolibre.app.provider;
 
 import static com.mercadolibre.app.util.MeliConstants.ACCESS_KEY;
+import static java.util.Objects.isNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,9 @@ public class ObtainInfoCountryCurrencyProvider {
 			response = restTemplate.exchange(this.properties.getUrlApiInfoCurrencyCountry().concat("?").concat(ACCESS_KEY)
 					.concat(this.properties.getAccessKeyInfoCurrencyCountry()).concat("&base=").concat(localCurrency).concat("&symbols=EUR,USD"), HttpMethod.GET, null, new ParameterizedTypeReference<String>() {});
 			Gson g = new Gson();  
-			currencyInfo = g.fromJson(response.getBody(), CurrencyCountryDTO.class);  
+			if(!isNull(response)) {
+				currencyInfo = g.fromJson(response.getBody(), CurrencyCountryDTO.class);  
+			}
 		} catch (Exception e) {
 			LOGGER.error("Error in consumeApiGetInfoCountryConcurrency: {}", e);
 		}

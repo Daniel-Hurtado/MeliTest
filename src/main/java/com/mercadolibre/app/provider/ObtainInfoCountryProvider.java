@@ -4,6 +4,7 @@
 package com.mercadolibre.app.provider;
 
 import static com.mercadolibre.app.util.MeliConstants.ACCESS_KEY;
+import static java.util.Objects.isNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,9 @@ public class ObtainInfoCountryProvider {
 			response = restTemplate.exchange(this.properties.getUrlApiInfoCountry().concat(countryCode).concat("?").concat(ACCESS_KEY).concat(this.properties.getAccessKeyInfoCountry()).concat("&fullText=true"), 
 					HttpMethod.GET, null, new ParameterizedTypeReference<String>() {});
 			Gson g = new Gson();  
-			countryInfo = g.fromJson(response.getBody(), CountryDTO.class);
+			if(!isNull(response)) {
+				countryInfo = g.fromJson(response.getBody(), CountryDTO.class);
+			}
 		} catch (Exception e) {
 			LOGGER.error("Error in consumeApiGetInfoCountry: {}", e);
 		}

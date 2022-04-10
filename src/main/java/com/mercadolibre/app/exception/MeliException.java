@@ -18,16 +18,6 @@ public class MeliException extends Exception {
     private final String errorCode;
 
     /**
-     * Metodo constructor
-     */
-    public MeliException(int status, String userMessage, String developerMessage, String errorCode, Throwable e) {
-        super(developerMessage, e);
-        this.userMessage = userMessage;
-        this.status = status;
-        this.errorCode = errorCode;
-    }
-
-    /**
      * Método constructor
      */
     public MeliException(int status, String userMessage, String developerMessage, String errorCode) {
