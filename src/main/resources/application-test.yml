@@ -1,0 +1,27 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: H2
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:./build/h2db/db/tenatest;DB_CLOSE_DELAY=-1
+    name: melitest
+    username: sa
+    password: sa
+    hikari:
+      maximum-pool-size: 2
+      max-lifetime: 30000
+      minimum-idle: 1
+      idle-timeout: 0
+      
+meli:
+  url-api-ip: test
+  access-key-ip: test
+  url-api-info-country: test
+  access-key-info-country: test
+  url-api-info-currency-country: test
+  access-key-info-currency-country: test
