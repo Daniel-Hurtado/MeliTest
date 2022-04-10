@@ -80,4 +80,10 @@ public class MeliValidation {
 					"DEM009");
 		}
 	}
+	
+	public void validationAddressIp(String ip) throws MeliException {
+		String pattern = "((?:(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d))))";
+        if(!ip.matches(pattern))
+        	throw new MeliException(HttpStatus.BAD_REQUEST.value(), ERROR_IP, "La IP no cumple con el formato estandar de IPv4", "DEM012");
+	}
 }

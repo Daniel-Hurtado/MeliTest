@@ -3,7 +3,6 @@
  */
 package com.mercadolibre.app.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +20,7 @@ import com.mercadolibre.app.model.Blacklist;
 public interface BlacklistRepository extends JpaRepository<Blacklist, Integer> {
 
 	Optional<Blacklist> findByIpAddress(String ip);
+	
+	
+	Optional<Blacklist> findByBlacklistId(Long blacklistId);
 }

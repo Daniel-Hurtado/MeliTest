@@ -16,7 +16,7 @@ spring:
     password: 1234
     hikari:
       maximum-pool-size: 2
-      pool-name: KrakenPool
+      pool-name: MeliPool
 
 server:
   port: 8080
@@ -25,7 +25,7 @@ server:
 
 logging:
   level:
-    com.familia: DEBUG
+    com.mercadolibre: DEBUG
     
 meli:
   url-api-ip: http://api.ipapi.com/
