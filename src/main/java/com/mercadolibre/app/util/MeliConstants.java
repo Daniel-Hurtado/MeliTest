@@ -20,5 +20,7 @@ public class MeliConstants {
     
     public static final String ACCESS_KEY = "access_key=";
     public static final String ERROR_IP = "Ocurrió un error al validar la información de tu dirección IP";
+    public static final String UNEXPECTED_ERROR = "Ocurrió un error inesperado";
+    public static final String EMPTY_STRING = "";
     
 }

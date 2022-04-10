@@ -1,7 +1,3 @@
-# MeliTest
-Project for process of Mercado Libre
-
-# Instrucciones de ejecución
 Para crear la red para comunicar contenedores
 docker network create meliproject         			      							
 
@@ -20,4 +16,4 @@ docker build -t meli-application:v1 .
 Para crear el contenedor apartir de la imagen
 docker run -p 8080:8080 --name meli-application --network meliproject meli-application:v1
 
-Una vez realizado esto y estando arriba la imagen de Mysql podríamos ir a la BD y ejecutar el archivo schema_bd.sql que dejo agregado a este repositorio	
+Una vez realizado esto y estando arriba la imagen de Mysql podríamos ir a la BD y ejecutar el archivo schema_bd.sql que dejo agregado a este repositorio		

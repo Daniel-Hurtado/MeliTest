@@ -4,25 +4,18 @@
 package com.mercadolibre.app.provider;
 
 import static com.mercadolibre.app.util.MeliConstants.ACCESS_KEY;
-import static com.mercadolibre.app.util.MeliConstants.ERROR_IP;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.mercadolibre.app.domain.CountryDTO;
-import com.mercadolibre.app.exception.MeliException;
 import com.mercadolibre.app.util.MeliProperties;
 
 /**

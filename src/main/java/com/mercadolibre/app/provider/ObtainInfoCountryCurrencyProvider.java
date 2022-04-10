@@ -16,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.mercadolibre.app.domain.CurrencyCountryDTO;
-import com.mercadolibre.app.domain.IpInfoDTO;
 import com.mercadolibre.app.util.MeliProperties;
 
 /**
