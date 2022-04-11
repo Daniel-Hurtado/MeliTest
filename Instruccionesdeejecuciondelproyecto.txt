@@ -14,6 +14,6 @@ Para compilar el dockerfile y crear la imagen
 docker build -t meli-application:v1 .				      							
 
 Para crear el contenedor apartir de la imagen
-docker run -p 8080:8080 --name meli-application --network meliproject meli-application:v1
+docker run -it -p 8080:8080 --name meli-application --network meliproject meli-application:v1
 
 Una vez realizado esto y estando arriba la imagen de Mysql podríamos ir a la BD y ejecutar el archivo schema_bd.sql que dejo agregado a este repositorio		
