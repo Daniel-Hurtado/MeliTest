@@ -11,7 +11,7 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/melidatabase
+    url: jdbc:mysql://instance-mysql:3306/melidatabase
     username: root
     password: 1234
     hikari:
@@ -27,6 +27,69 @@ logging:
   level:
     com.mercadolibre: DEBUG
     
+resilience4j:
+  circuitbreaker:
+    instances:
+        getInfoIp:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: COUNT_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 50s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+            automaticTransitionFromOpenToHalfOpenEnabled: true
+        banIp:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: COUNT_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 50s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+            automaticTransitionFromOpenToHalfOpenEnabled: true
+        listBanIp:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: COUNT_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 50s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+            automaticTransitionFromOpenToHalfOpenEnabled: true
+        desbanIp:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: COUNT_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 50s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+            automaticTransitionFromOpenToHalfOpenEnabled: true
+        deleteBanIp:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: COUNT_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 50s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+            automaticTransitionFromOpenToHalfOpenEnabled: true
+            
+management:  health:    circuitbreakers:      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+            
 meli:
   url-api-ip: http://api.ipapi.com/
   access-key-ip: 2c8bcab451a4c849487a6f56ce24adb5
